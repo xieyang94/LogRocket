@@ -1,0 +1,11 @@
+buildscript {
+    repositories {
+        maven { url = uri("https://jitpack.io") }
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "LogRocket"
+include ':app'
+include ':log-rocket'

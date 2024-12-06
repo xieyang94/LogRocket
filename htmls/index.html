@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogRocket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+        }
+        .controls input {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .controls span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        #messages {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            overflow-y: auto;
+            margin-top: 10px;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .tag:hover {
+            background-color: #0056b3;
+        }
+        .tag-remove {
+            margin-left: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <input type="text" id="url" placeholder="请输入 WebSocket URL">
+        <span id="status">未连接</span>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="keyword" placeholder="输入关键字过滤消息（空格分隔）">
+    </div>
+
+    <div id="tags"></div>
+
+    <div id="messages"></div>
+
+    <script>
+        let socket;
+        let isUserScrolling = false;  // 用户是否手动滚动
+        let autoScroll = true;        // 是否自动滚动
+        let filterKeywords = [];      // 用于存储过滤关键字
+
+        // 监听 WebSocket URL 输入框的回车事件来建立连接
+        document.getElementById('url').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const url = document.getElementById('url').value;
+                if (!url) {
+                    alert('请输入 WebSocket URL');
+                    return;
+                }
+
+                // 关闭已存在的连接
+                if (socket) {
+                    socket.close();
+                }
+
+                // 创建 WebSocket 连接
+                socket = new WebSocket(url);
+
+                socket.onopen = function(event) {
+                    document.getElementById('status').textContent = '已连接';
+                    appendMessage('连接成功');
+                };
+
+                socket.onmessage = function(event) {
+                    appendMessage('' + event.data);
+                };
+
+                socket.onclose = function(event) {
+                    document.getElementById('status').textContent = '未连接';
+                    appendMessage('连接关闭');
+                };
+
+                socket.onerror = function(error) {
+                    document.getElementById('status').textContent = '错误';
+                    appendMessage('发生错误: ' + error.message);
+                };
+            }
+        });
+
+        // 监听滚动事件，判断用户是否正在手动滚动
+        document.getElementById('messages').addEventListener('scroll', function() {
+            const messagesDiv = document.getElementById('messages');
+            if (Math.abs(messagesDiv.scrollHeight - messagesDiv.scrollTop - messagesDiv.clientHeight) < 30) {
+                if (isUserScrolling) {
+                    autoScroll = true;  // 用户滚动到最底部，恢复自动滚动
+                }
+                isUserScrolling = false;
+            } else {
+                isUserScrolling = true;
+                autoScroll = false;  // 用户手动滚动时停止自动滚动
+            }
+        });
+
+        // 监听关键字输入框的输入事件，动态更新过滤的关键字
+        document.getElementById('keyword').addEventListener('input', function(event) {
+            const input = event.target.value.trim();
+            if (input) {
+                const keywords = input.split(/\s+/);
+                updateTags(keywords);  // 更新标签
+            } else {
+                updateTags([]);  // 如果输入为空，清空过滤关键字
+            }
+        });
+
+        // 更新标签
+        function updateTags(keywords) {
+            filterKeywords = keywords;  // 更新过滤的关键字
+            displayTags();               // 更新标签显示
+            filterMessages();            // 过滤消息
+        }
+
+        // 显示关键字标签
+        function displayTags() {
+            const tagsDiv = document.getElementById('tags');
+            tagsDiv.innerHTML = '';  // 清空现有标签
+
+            filterKeywords.forEach(keyword => {
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${keyword} <span class="tag-remove" onclick="removeTag('${keyword}')">x</span>`;
+                tagsDiv.appendChild(tag);
+            });
+        }
+
+        // 删除标签
+        function removeTag(keyword) {
+            filterKeywords = filterKeywords.filter(item => item !== keyword);
+            updateTags(filterKeywords);  // 更新标签并过滤消息
+        }
+
+        // 添加消息到消息区域并过滤
+        function appendMessage(message) {
+            const messagesDiv = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messagesDiv.appendChild(messageElement);
+
+            // 过滤消息
+            filterMessages();
+
+            // 自动滚动到底部
+            if (autoScroll) {
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        }
+
+        // 过滤显示的消息（基于“或”的关系）
+        function filterMessages() {
+            const messagesDiv = document.getElementById('messages');
+            const allMessages = messagesDiv.children;
+
+            if (filterKeywords.length === 0) {
+                // 如果没有设置关键字，则显示所有消息
+                Array.from(allMessages).forEach(messageElement => {
+                    messageElement.style.display = 'block';
+                });
+            } else {
+                // 否则，根据关键字过滤
+                Array.from(allMessages).forEach(messageElement => {
+                    const text = messageElement.textContent;
+                    const matches = filterKeywords.some(keyword => text.includes(keyword));
+
+                    // 根据过滤条件显示或隐藏消息
+                    if (matches) {
+                        messageElement.style.display = 'block';
+                    } else {
+                        messageElement.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
