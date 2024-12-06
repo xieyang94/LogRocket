@@ -57,6 +57,8 @@ LogRocket建议仅仅在开发环境中使用，不建议上生产环境，以�
 
 因为就只是临时起意的一个小工具，所以就不想去搭服务器放网页，所以直接把h5文件放到了github上，或者直接通过浏览器访问github上的这个index.html即可。
 
+[日志查看](https://htmlpreview.github.io/?https://github.com/xieyang94/LogRocket/blob/dev/htmls/index.html)
+
 对于index.html，输入ws链接，回车即可；
 
 ![index_info.png](https://github.com/xieyang94/LogRocket/blob/dev/images/index_info.png)
