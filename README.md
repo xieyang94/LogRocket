@@ -2,6 +2,11 @@
 
 <img id="badge" src="https://jitpack.io/v/xieyang94/LogRocket.svg">
 
+> 好久没发布jitpack了，失败了好几次，导致版本直接干到了v1.0.5，成功后又把之前的删除了，目前只保留了v1.0.1，上面这个图片不想删除，以后迭代上去了，就会保持同步了
+
+### 版本
+- v1.0.1 「2024-12-06」
+
 <div align=center>
 <img src="https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png" width="128" height="128"/>
 </div>
