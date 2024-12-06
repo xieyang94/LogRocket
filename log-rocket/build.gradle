@@ -1,20 +1,17 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    //id 'com.github.dcendents.android-maven'
     id 'maven-publish'
 }
-group='com.github.xieyang94'
+group = 'com.github.xieyang94'
 
 android {
     compileSdk 34
-    //namespace 'com.net.yto.logrocket'
     defaultConfig {
-        //applicationId 'com.net.yto.logrocket'
-        minSdk 17
+        minSdk 16
         targetSdk 35
-        versionName '1.0.5'
-        versionCode 5
+        versionCode 6
+        versionName '1.0.6'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -35,30 +32,6 @@ android {
     }
 }
 
-/*afterEvaluate {
-    publishing {
-        repositories {
-            maven {
-                allowInsecureProtocol = true
-                url = MAVEN_URL as String
-                credentials {
-                    username MAVEN_USERNAME as String
-                    password MAVEN_PASSWORD as String
-                }
-            }
-        }
-
-        publications {
-            releaseAAR(MavenPublication) {
-                groupId = 'cn.net.yto.TechnologyPlatform'
-                artifactId = 'yto-logrocket'
-                version = "1.0.0-alpha1"
-                from components.release
-            }
-        }
-    }
-}*/
-
 afterEvaluate {
     publishing {
         publications {
@@ -69,8 +42,8 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'cn.net.yto.logrocket'
-                artifactId = 'final'
-                version = '1.0.5'
+                artifactId = 'log-rocket'
+                version = '1.0.6'
             }
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {
@@ -78,8 +51,8 @@ afterEvaluate {
                 from components.debug
 
                 groupId = 'cn.net.yto.logrocket'
-                artifactId = 'final-debug'
-                version = '1.0.5'
+                artifactId = 'log-rocket-debug'
+                version = '1.0.6'
             }
         }
     }
