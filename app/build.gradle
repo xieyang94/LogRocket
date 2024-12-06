@@ -3,7 +3,6 @@ plugins {
 }
 
 android {
-    namespace 'com.dream.logrocket'
     compileSdkVersion 34
 
     defaultConfig {
