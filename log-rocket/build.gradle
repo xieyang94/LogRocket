@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdk 16
         targetSdk 35
-        versionCode 6
-        versionName '1.0.6'
+        versionCode 1
+        versionName '1.0.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -43,7 +43,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'cn.net.yto.logrocket'
                 artifactId = 'log-rocket'
-                version = '1.0.6'
+                version = '1.0.1'
             }
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {
@@ -52,7 +52,7 @@ afterEvaluate {
 
                 groupId = 'cn.net.yto.logrocket'
                 artifactId = 'log-rocket-debug'
-                version = '1.0.6'
+                version = '1.0.1'
             }
         }
     }
