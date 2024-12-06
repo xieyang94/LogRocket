@@ -1,5 +1,7 @@
 # LogRocket
 
+![logo](https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png)
+
 ### 简介
 当前开发者可在AS控制台查看日志，或者通过adb查看日志，对于开发大有帮助；发生异常也可通过日志上报到日志平台去查看，十分便捷；
 
@@ -48,6 +50,7 @@ LogRocket建议仅仅在开发环境中使用，不建议上生产环境，以�
 
 对于index.html，输入ws链接，回车即可；
 
+![index_info.png](https://github.com/xieyang94/LogRocket/blob/dev/images/index_info.png)
 
 ### 注意点 
 需要保持ws的Server和Client在同一网络
@@ -115,6 +118,10 @@ public class ReflectLogRocket {
 }
 ```
 您也可以不采用这种用法，可以直接把代码拷贝到您的项目中，然后直接调用。
+
+### Demo
+Demo样式
+![index_info.png](https://github.com/xieyang94/LogRocket/blob/dev/images/app_cut.png)
 
 ### 其他
 
