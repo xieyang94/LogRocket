@@ -2,7 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
-apply plugin: 'maven-publish'
+//apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     namespace 'cn.net.yto.logrocket'
