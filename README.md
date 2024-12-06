@@ -134,7 +134,7 @@ public class ReflectLogRocket {
 Demo样式
 ![app_cut.png](https://github.com/xieyang94/LogRocket/blob/dev/images/app_cut.jpg)
 
-> 在下载apks目录下的apk体验下，在github上进行ws的访问好像存在点问题，后面有时间在处理，可以把htmls下的index.html下载下来本地打开使用
+> 可下载apks目录下的apk体验下，在github上的index.html进行ws的访问好像存在点问题，后面有时间在处理，可以把htmls下的index.html下载下来本地打开使用
 
 ### 其他
 
