@@ -1,5 +1,7 @@
 # LogRocket
 
+<img id="badge" src="https://jitpack.io/v/xieyang94/LogRocket.svg">
+
 <div align=center>
 <img src="https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png" width="128" height="128"/>
 </div>
