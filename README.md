@@ -1,6 +1,8 @@
 # LogRocket
 
-![logo](https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png)
+<div align=center>
+<img src="https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png" width="180" height="105"> width="128" height="128"/>
+</div>
 
 ### 简介
 当前开发者可在AS控制台查看日志，或者通过adb查看日志，对于开发大有帮助；发生异常也可通过日志上报到日志平台去查看，十分便捷；
@@ -121,7 +123,7 @@ public class ReflectLogRocket {
 
 ### Demo
 Demo样式
-![index_info.png](https://github.com/xieyang94/LogRocket/blob/dev/images/app_cut.png)
+![app_cut.png](https://github.com/xieyang94/LogRocket/blob/dev/images/app_cut.jpg)
 
 ### 其他
 
