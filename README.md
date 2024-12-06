@@ -1,7 +1,7 @@
 # LogRocket
 
 <div align=center>
-<img src="https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png" width="180" height="105"> width="128" height="128"/>
+<img src="https://github.com/xieyang94/LogRocket/blob/dev/images/icon_logo.png" width="128" height="128"/>
 </div>
 
 ### 简介
